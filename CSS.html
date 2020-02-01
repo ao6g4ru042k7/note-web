@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Joe's note</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/androidstudio.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+    <script src="https://cdn.bootcss.com/enquire.js/2.1.6/enquire.js"></script>
+
+    <script src="cssArr.js"></script>
+    <link rel="stylesheet" type="text/css" href="CSSStyle.css" />
+
+    <script>
+        window.onload = function () {
+            var oscrollset = document.getElementById('content').getElementsByClassName('content')[0];
+            var oContentIndex = document.getElementById('content').getElementsByClassName('content')[0].getElementsByTagName('ul')[0];
+            var oContentIndexShow = document.getElementById('content').getElementsByClassName('content')[0].getElementsByClassName('index')[0];
+
+            var oarticle = document.getElementsByClassName('article')[0];
+            var ocode = oarticle.getElementsByTagName('code');
+            var otitleIndexActive = document.getElementsByClassName('title-index-active')[0].getElementsByTagName('a')[0];
+            var otitleAllIndex = document.getElementsByClassName('title-all-index')[0];
+            var otitleAllIndexA = otitleAllIndex.getElementsByTagName('a');
+
+            var ocontentList = document.getElementsByClassName('content-list')[0];
+            var ocontentListText = ocontentList.getElementsByTagName('a')[0];
+            var w401_750 = false;
+            otitleAllIndex.isShow = false;
+            oContentIndex.onclick = oContentIndexOnclick;
+            oContentIndex.onmouseover = function () {
+                var e = window.event.target;
+                if (e.nodeName == 'A' && window.getComputedStyle(e)['backgroundColor'] != 'rgb(202, 158, 45)') {
+                    e.style.backgroundColor = 'black';
+                }
+            }
+            oContentIndex.onmouseout = function () {
+                var e = window.event.target;
+                if (e.nodeName == 'A' && window.getComputedStyle(e)['backgroundColor'] != 'rgb(202, 158, 45)') {
+                    e.style.backgroundColor = 'rgba(100, 100, 100,0.9)';
+                }
+            }
+            for (var i = 0; i < otitleAllIndexA.length; i++) {
+                otitleAllIndexA[i].onmouseover = function () {
+                    if (this.className != 'active')
+                        this.style.backgroundColor = 'black';
+                }
+            }
+            for (var i = 0; i < otitleAllIndexA.length; i++) {
+                otitleAllIndexA[i].onmouseout = function () {
+                    if (this.className != 'active')
+                        this.style.backgroundColor = 'unset';
+                }
+            }
+            var oContentIndexA = oContentIndex.getElementsByTagName('a');
+            for (var i = 0; i < oContentIndexA.length; i++) {
+                oContentIndexA[i].index = i;
+                oContentIndexA[i].onclick = function () {
+                    oarticle.innerHTML = htmlArr[this.index];
+                    var e = window.event.target;
+                    if (e.nodeName == 'A' && window.getComputedStyle(e)['backgroundColor'] != 'rgb(202, 158, 45)') {
+                        ocontentListText.innerHTML = e.innerHTML;
+                    }
+                    if (w401_750) {
+                        oContentIndexShow.style.display = 'none';
+                        oContentIndexShow.isShow = false;
+                    }
+                    for (var i = 0; i < ocode.length; i++) {
+                        hljs.highlightBlock(ocode[i]);
+                    }
+                }
+            }
+            otitleIndexActive.onclick = function () {
+                if (w401_750) {
+                    oContentIndexShow.style.display = 'none';
+                    oContentIndexShow.isShow = false;
+                }
+
+                otitleAllIndex.style.display = otitleAllIndex.isShow ? 'none' : 'block';
+                otitleAllIndex.isShow = !otitleAllIndex.isShow;
+            }
+            ocontentList.onclick = function () {
+                if (w401_750) {
+                    otitleAllIndex.style.display = 'none';
+                    otitleAllIndex.isShow = false;
+                }
+
+                oContentIndexShow.style.display = oContentIndexShow.isShow ? 'none' : 'block';
+                oContentIndexShow.isShow = !oContentIndexShow.isShow;
+            }
+            function oContentIndexOnclick() {
+                var e = window.event.target;
+                if (e.nodeName == 'A') {
+                    if (oContentIndex.index) {
+                        oContentIndex.index.style.backgroundColor = 'rgb(100, 100, 100)';
+                    }
+                    e.style.backgroundColor = 'rgb(202, 158, 45)';
+                    oContentIndex.index = e;
+                }
+                oscrollset.scrollLeft = oscrollset.clientWidth;
+            }
+            enquire.register("screen and (max-width:400px)", {
+                match: function () {
+                    otitleAllIndex.style.display = 'none';
+                    otitleAllIndex.isShow = false;
+                    oContentIndex.onclick = oContentIndexOnclick;
+                },
+                unmatch: function () {
+                    otitleAllIndex.style.display = 'none';
+                    otitleAllIndex.isShow = false;
+                    oContentIndex.onclick = function () { };
+                }
+            });
+            enquire.register("screen and (max-width:750px)", {
+                match: function () {
+                    otitleAllIndex.style.display = 'none';
+                    otitleAllIndex.isShow = false;
+                },
+                unmatch: function () {
+                    otitleAllIndex.style.display = 'block';
+                }
+            });
+            enquire.register("screen and (min-width:401px) and (max-width:750px)", {
+                match: function () {
+                    w401_750 = true;
+                },
+                unmatch: function () {
+                    w401_750 = false;
+                }
+            });
+            enquire.register("screen and (min-width:401px) and (max-width:750px)", {
+                match: function () {
+                    w401_750 = true;
+                    oContentIndexShow.style.display = 'none';
+                    oContentIndexShow.isShow = false;
+                },
+                unmatch: function () {
+                    w401_750 = false;
+                    oContentIndexShow.style.display = 'block';
+                }
+            });
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id='AllBox'>
+        <div id='head'>
+            <div class='fixCenter'>
+                <a><img src="img/title.png"></a>
+            </div>
+        </div>
+        <div id='content'>
+            <div class='contentBox fixCenter clearfix'>
+                <div class='title'>
+                    <div class="title-min">
+                        <div class='title-index-active'>
+                            <a class="active">CSS</a>
+                        </div>
+                        <div class='content-list'>
+                            <a class="active">簡介</a>
+                        </div>
+                        <div class='title-all-index'>
+                            <div class='title-index'>
+                                <a href="HTML.html">HTML</a>
+                            </div>
+                            <div class='title-index'>
+                                <a href="CSS.html" class="active">CSS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='content'>
+                    <div class="content-min">
+                        <div class="index">
+                            <ul>
+                                <li>
+                                    <h2>文字</h2>
+                                </li>
+                                <li><a>color</a></li>
+                                <li><a>font-weight</a></li>
+                                <li><a>font-style</a></li>
+                                <li><a>font-family</a></li>
+                                <li><a>font-variant</a></li>
+                                <li><a>text-decoration</a></li>
+                                <li><a>text-align</a></li>
+                                <li><a>line-height</a></li>
+                                <li>
+                                    <h2>背景</h2>
+                                </li>
+                                <li><a>background-color</a></li>
+                                <li><a>background-image</a></li>
+                                <li><a>background-repeat</a></li>
+                                <li><a>background-size</a></li>
+                                <li><a>background-position</a></li>
+                                <li>
+                                    <h2>邊框和距離</h2>
+                                </li>
+                                <li><a>border</a></li>
+                                <li><a>padding</a></li>
+                                <li><a>margin</a></li>
+                                <li><a>box-sizing</a></li>
+                                <li>
+                                    <h2>列表</h2>
+                                </li>
+                                <li><a>list-style-type</a></li>
+                                <li><a>list-style-position</a></li>
+                                <li><a>list-style-image</a></li>
+                                <li>
+                                    <h2>表格</h2>
+                                </li>
+                                <li><a>border</a></li>
+                                <li><a>border-spacing</a></li>
+                                <li><a>border-collapse</a></li>
+                                <li><a>empty-cells</a></li>
+                                <li><a>tr:nth-child</a></li>
+                                <li>
+                                    <h2>事件</h2>
+                                </li>
+                                <li><a>選擇器</a></li>
+                                <li>
+                                    <h2>display</h2>
+                                </li>
+                                <li><a>block</a></li>
+                                <li><a>inline</a></li>
+                                <li><a>inline-block</a></li>
+                                <li>
+                                    <h2>位置</h2>
+                                </li>
+                                <li><a>float</a></li>
+                                <li><a>position</a></li>
+                                <li><a>z-index</a></li>
+                                <li><a>垂直居中</a></li>
+                                <li>
+                                    <h2>溢出</h2>
+                                </li>
+                                <li><a>overflow</a></li>
+                                <li>
+                                    <h2>高度坍塌</h2>
+                                </li>
+                                <li><a>clearfix</a></li>
+                                <li>
+                                    <h2></h2>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="article">
+                            <h1 class='chinese-h'>簡介</h1>
+                            <hr />
+                            <h2 class='chinese'>曾經重新學過三次HTML/CSS基礎語法，但每次學完後沒有複習都會忘得很快，因此這網站是紀錄我曾經學過的HTML/CSS，內容可能不盡詳細，但會在日後不斷更新，並持續督促自己，學習新知識的同時，不能將舊的知識給拋棄掉。</h2>
+                            <br />
+                            <img src="https://simg314.magcasa.com/content_images/2016/04/07/277256/1460021806_897.jpg"
+                                width="100%" style="border-radius: 50%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='footer'></div>
+
+</body>
+
+</html>

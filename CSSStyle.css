@@ -1,0 +1,283 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+
+    background-color: teal;
+    font-family: '微軟正黑體',monospace;
+}
+
+#AllBox {
+    padding: 0 20px 40px;
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+.fixCenter {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+#content .contentBox {
+    border-radius: 10px;
+    background-color: rgb(100, 100, 100);
+}
+
+#content .contentBox .title {
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    background-color: rgb(70, 70, 70);
+    overflow: hidden;
+}
+
+#content .contentBox .title .title-min {
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
+}
+
+#content .contentBox .title .title-index {
+    float: left;
+}
+
+#content .contentBox .title .content-list {
+    float: right;
+    margin-right: 40px;
+}
+
+#content .contentBox .title a {
+    text-decoration: none;
+    color: white;
+    font-weight: bolder;
+    font-size: 25px;
+    height: 70px;
+    padding: 10px;
+    line-height: 70px;
+    margin-left: 20px;
+}
+
+#content .contentBox .title .title-index-active {
+    float: left;
+}
+
+#content .contentBox .title .title-index-active a {
+    background-image: url('img/baseline_view_list_white_18dp.png');
+    background-repeat: no-repeat;
+    background-position: 5px center;
+    padding: 10px 10px 10px 45px;
+    display: none;
+    cursor: pointer;
+}
+
+#content .contentBox .title .content-list a {
+    background-image: url('img/baseline_reorder_white_18dp.png');
+    background-repeat: no-repeat;
+    background-position: 5px center;
+    padding: 10px 10px 10px 45px;
+    display: none;
+    cursor: pointer;
+}
+
+#content .contentBox .title .title-all-index {
+    display: block;
+}
+
+#content .contentBox .title a {
+    border-radius: 5px;
+}
+
+#content .contentBox .title .active {
+    background-color: rgb(202, 158, 45);
+}
+
+#content .contentBox .content {
+    width: 100%;
+    /* position: relative; */
+    overflow: auto;
+}
+
+#content .contentBox .content .content-min {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+#content .contentBox .content .index {
+    flex: none;
+    width: 200px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#content .contentBox .content .index ul {
+    list-style: none;
+}
+#content .contentBox .content .index ul li a ,
+#content .contentBox .content .index ul li h2
+{
+    padding-left: 20px;
+    color: white;
+    /* font-weight: bold; */
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(100, 100, 100,0.9);
+}
+#content .contentBox .content .index ul li a{
+    font-size: 17px;
+    text-decoration: none;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}
+#content .contentBox .content .index ul li h2{
+    height: 50px;
+    line-height: 58px;
+}
+#content .contentBox .content .article {
+    width: 0%;
+    height: auto;
+    padding: 35px 5%;
+    box-sizing: border-box;
+    flex: 1;
+    background-color: rgb(200, 200, 200);
+}
+
+#content .contentBox .content .article .chinese-h {
+    border-bottom: 5px solid gray;
+}
+#content .contentBox .content .article .chinese-p {
+    font-weight: 500;
+}
+
+
+#content .contentBox .content .article .show,
+#content .contentBox .content .article .coding {
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    font-size: 20px;
+    overflow: auto;
+}
+
+#content .contentBox .content .article .show {
+    border: 4px solid rgb(150, 150, 150);
+    background-color: white;
+    color: black;
+}
+
+#content .contentBox .content .article .coding {
+    border: 4px solid rgb(70, 70, 70);
+    background-color: rgb(40, 43, 46);
+    color: white;
+}
+
+#content .contentBox .content .article .show {
+    border: 4px solid rgb(150, 150, 150);
+    background-color: white;
+    color: black;
+}
+#content .contentBox .content .article .atext a{
+    font-weight: bolder;
+    font-size: 25px;
+    text-decoration: none;
+    color: blue;
+}
+#content .contentBox .content .article .tablebox{
+    margin: 20px 0;
+}
+#content .contentBox .content .article .tablebox table{
+    text-align:left;
+    border:1px rgb(150, 150, 150) solid;
+    border-collapse: collapse;
+}
+#content .contentBox .content .article .tablebox table tr th{
+    background-color: wheat;
+}
+#content .contentBox .content .article .tablebox table td,
+#content .contentBox .content .article .tablebox table th{
+    border-top:1px rgb(150, 150, 150) solid;
+    border-bottom:1px rgb(150, 150, 150) solid;
+    padding: 3px 10px;
+}
+#content .contentBox .content .article .tablebox table tr:nth-child(odd) td{
+    background-color: rgb(238, 238, 238);
+
+}
+#content .contentBox .content .article .tablebox table tr:nth-child(even) td{
+    background-color: rgb(218, 218, 218);
+}
+#footer {
+    height: 100px;
+    background-color: rgb(56, 56, 56);
+}
+
+@media screen and (min-width:401px) and (max-width:750px) {
+    #content .contentBox .content .index {
+        display: none;
+        position: absolute;
+        right: 20px;
+        width: 210px;
+        height: 500px;
+        overflow-x: none;
+        overflow-y: auto;
+    }
+
+    #content .contentBox .title .content-list a {
+        display: inline;
+    }
+}
+
+@media screen and (max-width:750px) {
+    #content .contentBox .title .title-index-active a {
+        display: inline;
+    }
+
+    #content .contentBox .title .title-all-index {
+        display: none;
+    }
+
+    #content .contentBox .title .title-index {
+        border-top: 1px rgb(150, 150, 150) solid;
+        clear: both;
+        float: left;
+    }
+
+    #content .contentBox .title .title-index {
+        float: none;
+    }
+}
+
+@media screen and (max-width:400px) {
+
+    #content .contentBox .content .index {
+        width: 100%;
+    }
+
+    #content .contentBox .content .article {
+        flex: none;
+        width: 100%;
+    }
+
+    #AllBox {
+        padding: 0;
+    }
+
+    #content .contentBox .title {
+        border-radius: 0;
+    }
+
+    #content .contentBox {
+        border-radius: 0;
+    }
+}
+
+@media screen and (max-width:540px) {
+    #AllBox #head img {
+        width: 100%;
+    }
+}

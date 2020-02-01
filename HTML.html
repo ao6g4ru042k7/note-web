@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Joe's note</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/androidstudio.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+    <script src="https://cdn.bootcss.com/enquire.js/2.1.6/enquire.js"></script>
+
+    <script src="htmlArr.js"></script>
+    <link rel="stylesheet" type="text/css" href="HTMLStyle.css" />
+
+    <script>
+        window.onload = function () {
+            var oscrollset = document.getElementById('content').getElementsByClassName('content')[0];
+            var oContentIndex = document.getElementById('content').getElementsByClassName('content')[0].getElementsByTagName('ul')[0];
+            var oContentIndexShow = document.getElementById('content').getElementsByClassName('content')[0].getElementsByClassName('index')[0];
+
+            var oarticle = document.getElementsByClassName('article')[0];
+            var ocode = oarticle.getElementsByTagName('code');
+            var otitleIndexActive = document.getElementsByClassName('title-index-active')[0].getElementsByTagName('a')[0];
+            var otitleAllIndex = document.getElementsByClassName('title-all-index')[0];
+            var otitleAllIndexA = otitleAllIndex.getElementsByTagName('a');
+
+            var ocontentList = document.getElementsByClassName('content-list')[0];
+            var ocontentListText = ocontentList.getElementsByTagName('a')[0];
+            var w401_690 = false;
+            var w401_750 = false;
+            otitleAllIndex.isShow = false;
+            oContentIndex.onclick = oContentIndexOnclick;
+            oContentIndex.onmouseover = function () {
+                var e = window.event.target;
+                if (e.nodeName == 'A' && window.getComputedStyle(e)['backgroundColor'] != 'rgb(202, 158, 45)') {
+                    e.style.backgroundColor = 'black';
+                }
+            }
+            oContentIndex.onmouseout = function () {
+                var e = window.event.target;
+                if (e.nodeName == 'A' && window.getComputedStyle(e)['backgroundColor'] != 'rgb(202, 158, 45)') {
+                    e.style.backgroundColor = 'rgb(100, 100, 100)';
+                }
+            }
+            for (var i = 0; i < otitleAllIndexA.length; i++) {
+                otitleAllIndexA[i].onmouseover = function () {
+                    if (this.className != 'active')
+                        this.style.backgroundColor = 'black';
+                }
+            }
+            for (var i = 0; i < otitleAllIndexA.length; i++) {
+                otitleAllIndexA[i].onmouseout = function () {
+                    if (this.className != 'active')
+                        this.style.backgroundColor = 'unset';
+                }
+            }
+            var oContentIndexLi = oContentIndex.getElementsByTagName('li');
+            for (var i = 0; i < oContentIndexLi.length; i++) {
+                oContentIndexLi[i].index = i;
+                oContentIndexLi[i].onclick = function () {
+                    var e = window.event.target;
+                    oarticle.innerHTML = htmlArr[this.index];
+                    if (e.nodeName == 'A' && window.getComputedStyle(e)['backgroundColor'] != 'rgb(202, 158, 45)') {
+                        ocontentListText.innerHTML = e.innerHTML;
+                    }
+                    if (w401_750) {
+                        oContentIndexShow.style.display = 'none';
+                        oContentIndexShow.isShow = false;
+                    }
+                    for (var i = 0; i < ocode.length; i++) {
+                        hljs.highlightBlock(ocode[i]);
+                    }
+                }
+            }
+            otitleIndexActive.onclick = function () {
+                if (w401_690) {
+                    oContentIndexShow.style.display = 'none';
+                    oContentIndexShow.isShow = false;
+                }
+
+                otitleAllIndex.style.display = otitleAllIndex.isShow ? 'none' : 'block';
+                otitleAllIndex.isShow = !otitleAllIndex.isShow;
+            }
+            ocontentList.onclick = function () {
+                if (w401_690) {
+                    otitleAllIndex.style.display = 'none';
+                    otitleAllIndex.isShow = false;
+                }
+
+                oContentIndexShow.style.display = oContentIndexShow.isShow ? 'none' : 'block';
+                oContentIndexShow.isShow = !oContentIndexShow.isShow;
+            }
+            function oContentIndexOnclick() {
+                var e = window.event.target;
+                if (e.nodeName == 'A') {
+                    if (oContentIndex.index) {
+                        oContentIndex.index.style.backgroundColor = 'rgb(100, 100, 100)';
+                    }
+                    e.style.backgroundColor = 'rgb(202, 158, 45)';
+                    oContentIndex.index = e;
+                }
+                oscrollset.scrollLeft = oscrollset.clientWidth;
+            }
+            enquire.register("screen and (max-width:400px)", {
+                match: function () {
+                    otitleAllIndex.style.display = 'none';
+                    otitleAllIndex.isShow = false;
+                    oContentIndex.onclick = oContentIndexOnclick;
+                },
+                unmatch: function () {
+                    otitleAllIndex.style.display = 'none';
+                    otitleAllIndex.isShow = false;
+                    oContentIndex.onclick = function () { };
+                }
+            });
+            enquire.register("screen and (max-width:690px)", {
+                match: function () {
+                    otitleAllIndex.style.display = 'none';
+                    otitleAllIndex.isShow = false;
+                },
+                unmatch: function () {
+                    otitleAllIndex.style.display = 'block';
+                }
+            });
+            enquire.register("screen and (min-width:401px) and (max-width:690px)", {
+                match: function () {
+                    w401_690 = true;
+                },
+                unmatch: function () {
+                    w401_690 = false;
+                }
+            });
+            enquire.register("screen and (min-width:401px) and (max-width:750px)", {
+                match: function () {
+                    w401_750 = true;
+                    oContentIndexShow.style.display = 'none';
+                    oContentIndexShow.isShow = false;
+                },
+                unmatch: function () {
+                    w401_750 = false;
+                    oContentIndexShow.style.display = 'block';
+                }
+            });
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id='AllBox'>
+        <div id='head'>
+            <div class='fixCenter'>
+                <a><img src="img/title.png"></a>
+            </div>
+        </div>
+        <div id='content'>
+            <div class='contentBox fixCenter clearfix'>
+                <div class='title'>
+                    <div class="title-min">
+                        <div class='title-index-active'>
+                            <a class="active">HTML</a>
+                        </div>
+                        <div class='content-list'>
+                            <a class="active">簡介</a>
+                        </div>
+                        <div class='title-all-index'>
+                            <div class='title-index'>
+                                <a href="HTML.html" class="active">HTML</a>
+                            </div>
+                            <div class='title-index'>
+                                <a href="CSS.html">CSS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='content'>
+                    <div class="content-min">
+                        <div class="index">
+                            <ul>
+                                <li><a>標題</a></li>
+                                <li><a>段落</a></li>
+                                <li><a>粗體字</a></li>
+                                <li><a>傾斜字</a></li>
+                                <li><a>下滑線</a></li>
+                                <li><a>上 / 下標註</a></li>
+                                <li><a>特殊字符</a></li>
+                                <li><a>超連結</a></li>
+                                <li><a>列表</a></li>
+                                <li><a>表格</a></li>
+                                <li><a>表單</a></li>
+                                <li><a>輸入框</a></li>
+                                <li><a>圓形單選框</a></li>
+                                <li><a>方形複選框</a></li>
+                                <li><a>下拉菜單</a></li>
+                                <li><a>按鈕</a></li>
+                                <li><a>圖片</a></li>
+                            </ul>
+                        </div>
+                        <div class="article">
+                            <h1 class='chinese-h'>簡介</h1>
+                            <hr />
+                            <h2 class='chinese'>曾經重新學過三次HTML/CSS基礎語法，但每次學完後沒有複習都會忘得很快，因此這網站是紀錄我曾經學過的HTML/CSS，內容可能不盡詳細，但會在日後不斷更新，並持續督促自己，學習新知識的同時，不能將舊的知識給拋棄掉。</h2>
+                            <br />
+                            <img src="https://simg314.magcasa.com/content_images/2016/04/07/277256/1460021806_897.jpg"
+                                width="100%" style="border-radius: 50%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='footer'></div>
+
+</body>
+
+</html>
